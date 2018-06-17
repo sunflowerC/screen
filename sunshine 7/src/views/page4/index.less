@@ -1,0 +1,180 @@
+#page4 {
+  .content {
+    width: 100%;
+    height: 1080px;
+    background: #020d1e;
+    .box {
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      background: url('./images/Bgfour.png');
+      .titlebox {
+        width: 1080px;
+        height: auto;
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 60px;
+        background-image: url('./images/l.png'), url('./images/r.png');
+        background-repeat: no-repeat no-repeat;
+        background-position: 0 22px, 100%;
+        // background-size: 919px 10px;
+
+        h3 {
+          font-size: 36px;
+          color: #e1fcff;
+        }
+      }
+      .code {
+        display: flex;
+        .code1 {
+          margin-left: 160px;
+          border-right: 1px solid #02b9f5;
+        }
+        .code2 {
+          margin-left: 70px;
+        }
+        ul {
+          display: flex;
+          padding-right: 70px;
+          li {
+            img {
+              margin-right: 30px;
+            }
+            &:nth-child(2) {
+              display: flex;
+              flex-direction: column;
+              span {
+                color: #33e9ff;
+                font-size: 24px;
+                &:nth-child(2) {
+                  margin-top: 35px;
+                  font-size: 24px;
+                  color: #33e9ff;
+                  i {
+                    color: #ffff00;
+                    font-size: 36px;
+                    font-style: normal;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .box {
+        width: 1845px;
+        height: 725px;
+        box-sizing: border-box;
+        margin: 0 auto;
+        margin-top: 50px;
+        background: rgba(10, 32, 80, 0.6);
+        .box1 {
+          background: url('./images/box_lt.png'), url('./images/box_rt.png'),
+            url('./images/box_lb.png'), url('./images/box_rb.png');
+          background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+          background-position: 0 0, 1823px 0, 0 703px, 1823px 703px;
+          width: 100%;
+          height: 100%;
+          border: 1px solid #528eec;
+          box-sizing: border-box;
+          float: left;
+          margin-right: 44px;
+          box-sizing: border-box;
+          .chartsBg {
+            display: flex;
+            .title {
+              width: 326px;
+              margin-left: 600px;
+              text-align: center;
+              background: url('./images/base.png') no-repeat;
+              background-position: bottom;
+              line-height: 35px;
+              margin-top: 28px;
+              li {
+                font-size: 24px;
+                color: #33e9ff;
+                i {
+                  font-style: normal;
+                  font-size: 36px;
+                  color: #ffff00;
+                  margin-left: 40px;
+                  margin-right: 15px;
+                }
+              }
+            }
+            .title2 {
+              margin-left: 250px;
+            }
+            .check-box {
+              margin-top: 39px;
+              margin-left: 75px;
+              float: right;
+              overflow: hidden;
+              ul {
+                width: 100%;
+                height: 24px;
+                margin-right: 50px;
+                li {
+                  float: left;
+                  margin-left: 30px;
+                  height: 23px;
+                  position: relative;
+                  display: flex;
+                  input {
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 0;
+                    top: 1px;
+                    cursor: pointer;
+                    z-index: 20;
+                    opacity: 0;
+                    filter: alpha(opacity=0);
+                  }
+                  div {
+                    width: 23px;
+                    height: 23px;
+                    position: absolute;
+                    left: 0rem;
+                    top: 1px;
+                    background: url('./images/checked_off.png');
+                    background-size: 100% 100%;
+                    &.checked {
+                      background: url('./images/checked_on.png');
+                      background-size: 100% 100%;
+                    }
+                  }
+                  label {
+                    margin-left: 38px;
+                    font-size: 18px;
+                    color: #00deff;
+                    line-height: 26px;
+                    cursor: pointer;
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -khtml-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                  }
+                }
+              }
+            }
+          }
+          .chartsbox {
+            width: 100%;
+            height: 620px;
+            margin-top: 37px;
+            display: flex;
+            .main9 {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
