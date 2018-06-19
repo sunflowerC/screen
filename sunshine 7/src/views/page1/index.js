@@ -3,7 +3,7 @@ import './index.less';
 import tpl from './tpl';
 
 export default () => {
-  // todo2
+  // todo
   document.getElementById('page1').innerHTML = tpl;
 };
 

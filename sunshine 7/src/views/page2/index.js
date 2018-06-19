@@ -2,307 +2,12 @@
 import echarts from 'echarts';
 import $ from 'jquery';
 import './index.less';
-import icontrank from './images/icon_truck.png';
 import axios from 'axios';
 import _ from 'lodash';
+import tpl from './tpl';
 
 export default () => {
-  document.getElementById('page2').innerHTML = `
-  <div class="content">
-  <div class="box">
-    <div class="titlebox">
-      <h3>统计分析</h3>
-    </div>
-    <div class="top">
-      <div class="box1">
-        <div class="bg">
-          <div class="title">
-            <h4>各区县企业分布统计</h4>
-          </div>
-        </div>
-        <div class="chartsBg">
-          <div class="leng">
-            <div class="legend">
-              <span class="rect"></span>
-              <span class="text">危化企业
-                <i id="sumwh">208</i>
-                <em> 家</em>
-              </span>
-              <span class="rect rect2"></span>
-              <span class="text">运输企业
-                <i id="sumys">162</i>
-                <em> 家</em>
-              </span>
-
-
-            </div>
-          </div>
-          <div id="main">
-
-          </div>
-        </div>
-      </div>
-      <div class="box1">
-        <div class="bg">
-          <div class="title">
-            <h4>从业人员年龄段分析</h4>
-          </div>
-        </div>
-        <div class="chartsBg">
-          <div class="leng">
-            <div class="legend legend2">
-              <span class="rect"></span>
-
-              <span class="text">押运人
-                <i id="yayunren">208</i>
-                <em> 人</em>
-              </span>
-              <span class="rect rect3"></span>
-              <span class="text">驾驶员
-                <i id="jiashiyuan">162</i>
-                <em> 人</em>
-              </span>
-              <span class="rect rect4"></span>
-              <span class="text">特种作业
-                <i id="tezhongzuoye">162</i>
-                <em> 人</em>
-              </span>
-              <span class="rect rect5"></span>
-              <span class="text">装卸管理
-                <i id="zhuangxieguanli">162</i>
-                <em> 人</em>
-              </span>
-              <span class="rect rect6"></span>
-              <span class="text">其它
-                <i id="qita">162</i>
-                <em> 人</em>
-              </span>
-            </div>
-          </div>
-          <div id="main1">
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="top">
-      <div class="box1">
-        <div class="bg">
-          <div class="title">
-            <h4>装卸分析</h4>
-          </div>
-        </div>
-        <div class="chartsBg">
-          <div class="tableleft">
-            <ul class="tabhead">
-              <li>区域</li>
-              <li>装货区</li>
-              <li>卸货区</li>
-              <li>装货车位</li>
-              <li>卸货车位</li>
-            </ul>
-            <div class="tabself" id="zhuangxie-fenxi">
-              <table>
-                <tr>
-                  <td class="singlecolor">张店区</td>
-                  <td>10</td>
-                  <td>22</td>
-                  <td>32</td>
-                  <td>48</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor"> 临川区 </td>
-                  <td>2</td>
-                  <td>6</td>
-                  <td>34</td>
-                  <td>54</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">博山区 </td>
-                  <td>23</td>
-                  <td>43</td>
-                  <td>45</td>
-                  <td>45</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">周村区 </td>
-                  <td>45</td>
-                  <td>65</td>
-                  <td>65</td>
-                  <td>87</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">临淄区 </td>
-                  <td>98</td>
-                  <td>9</td>
-                  <td>47</td>
-                  <td>47</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">高新区 </td>
-                  <td>29</td>
-                  <td>30</td>
-                  <td>40</td>
-                  <td>40</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">经开区 </td>
-                  <td>30</td>
-                  <td>40</td>
-                  <td>50</td>
-                  <td>60</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor">桓台区 </td>
-                  <td>98</td>
-                  <td>89</td>
-                  <td>58</td>
-                  <td>58</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor"> 高青区 </td>
-                  <td>29</td>
-                  <td>39</td>
-                  <td>40</td>
-                  <td>40</td>
-                </tr>
-                <tr>
-                  <td class="singlecolor singlebb"> 沂源区 </td>
-                  <td class="singlebb">29</td>
-                  <td class="singlebb">77</td>
-                  <td class="singlebb">67</td>
-                  <td class="singlebb">67</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="varieties">
-            <div class="tray">充装车位品种分析</div>
-            <div class="analysis">
-              <div class="rank">01</div>
-              <div class="section">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">230</span>
-              <i class="text">货物1</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">02</div>
-              <div class="section2">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">660</span>
-              <i class="text">货物2</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">03</div>
-              <div class="section3">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">1000</span>
-              <i class="text">货物3</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">04</div>
-              <div class="section4">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">990</span>
-              <i class="text">货物4</i>
-            </div>
-            <div class="tray traytop">卸车车位品种分析</div>
-            <div class="analysis">
-              <div class="rank">01</div>
-              <div class="section5">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">200</span>
-              <i class="text">货物1</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">02</div>
-              <div class="section6">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">660</span>
-              <i class="text">货物2</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">03</div>
-              <div class="section7">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">800</span>
-              <i class="text">货物3</i>
-            </div>
-            <div class="analysis">
-              <div class="rank rank2">04</div>
-              <div class="section8">
-                <ul>
-                  <!-- <li></li> -->
-                </ul>
-              </div>
-              <span class="num">900</span>
-              <i class="text">货物4</i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="box1">
-        <div class="bg">
-          <div class="title">
-            <h4>运输范围统计</h4>
-          </div>
-        </div>
-        <div class="chartsBg">
-          <div class="information">
-            <img class="icon_truck" src="${icontrank}" alt="">
-            <ul class="car">
-              <li>车辆总数</li>
-              <li>
-                <i id="cheliangzongshu">0</i>辆</li>
-            </ul>
-            <div class="line"></div>
-            <span class="car-category">牵引车
-              <i id="qianyinche">0</i>
-              <em>辆</em>
-            </span>
-            <span class="car-category">挂车
-              <i id="guache">0</i>
-              <em>辆</em>
-            </span>
-            <span class="car-category">其它
-              <i id="qitache">0</i>
-              <em>辆</em>
-            </span>
-          </div>
-          <div class="chartbox">
-            <div id="main3">
-
-            </div>
-            <div id="main4"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  `;
+  document.getElementById('page2').innerHTML = tpl;
 
   function char(
     obj,
@@ -321,15 +26,15 @@ export default () => {
     }
     // var total = num;
     $('.' + obj)
-          .siblings('.num')
-          .text(num);
+      .siblings('.num')
+      .text(num);
     $('.' + obj).siblings('.text').text(text);
     var accounted = Math.floor(
       Math.floor(
         (
           num *
           sectionWidth) /
-          total
+        total
       ) / liWidth
     );
     for (var i = 0; i < $('.' + obj).find('ul li').length; i++) {
@@ -377,34 +82,32 @@ export default () => {
         color: '#193569',
       },
     },
-    xAxis: [
-      {
-        data: chartsName1,
-        name: '',
-        splitLine: {
-          //网格线
-          show: true,
-          lineStyle: {
-            color: '#2e3f5d',
-            type: 'solid',
-          },
-        },
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          textStyle: {
-            color: '#defafe',
-            fontSize: 14,
-          },
-        },
-        axisLine: {
-          lineStyle: {
-            color: '#defafe',
-          },
+    xAxis: [{
+      data: chartsName1,
+      name: '',
+      splitLine: {
+        //网格线
+        show: true,
+        lineStyle: {
+          color: '#2e3f5d',
+          type: 'solid',
         },
       },
-    ],
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#defafe',
+          fontSize: 14,
+        },
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#defafe',
+        },
+      },
+    }, ],
     yAxis: {
       name: '单位:家',
       type: 'value',
@@ -438,16 +141,14 @@ export default () => {
         },
       },
     },
-    series: [
-      {
+    series: [{
         name: '危化企业',
         type: 'pictorialBar',
         barGap: '-60%',
         symbol: 'path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z',
         itemStyle: {
           normal: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
                 color: '#d1fdff',
               },
@@ -472,8 +173,7 @@ export default () => {
         itemStyle: {
           normal: {
             //color: "#5fbeeb",
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                 offset: 0,
                 color: '#ede7ff',
               },
@@ -559,8 +259,7 @@ export default () => {
         show: false,
       },
     },
-    yAxis: [
-      {
+    yAxis: [{
         type: 'category',
         axisTick: {
           show: false,
@@ -601,8 +300,7 @@ export default () => {
     ],
     // dataType
     // 0: 装卸管理员 1:特种设备作业人员 2:驾驶员 3:押运员 4:其他人员 5：装卸管理人员
-    series: [
-      {
+    series: [{
         name: '押运人',
         type: 'bar',
         dataType: 3,
@@ -712,78 +410,72 @@ export default () => {
       bottom: '3%',
       containLabel: true,
     },
-    xAxis: [
-      {
-        type: 'category',
-        // 0:营运; 1:停用; 2:报废; 3:停驶; 4:其它',
-        // data: ['普运', '停运', '报废', '停驶', '其它'],
-        // 1:中型普通货车  2:保温冷藏车   4:危险品运输车  5:小型普通货车  6:平板车  7:挂车  8:牵引车  9:罐车  10:重型普通货车  11:集装箱车 3:其他车辆',
-        data: [],
-        axisTick: {
-          show: false,
-          alignWithLabel: false,
-        },
-        axisLine: {
-          lineStyle: {
-            color: '#defafe',
-            width: '1',
-            type: 'solid',
-          },
-        },
-        axisLabel: {
-          interval: 0,
-          rotate: 45,
-          textStyle: {
-            color: '#defafe',
-          },
+    xAxis: [{
+      type: 'category',
+      // 0:营运; 1:停用; 2:报废; 3:停驶; 4:其它',
+      // data: ['普运', '停运', '报废', '停驶', '其它'],
+      // 1:中型普通货车  2:保温冷藏车   4:危险品运输车  5:小型普通货车  6:平板车  7:挂车  8:牵引车  9:罐车  10:重型普通货车  11:集装箱车 3:其他车辆',
+      data: [],
+      axisTick: {
+        show: false,
+        alignWithLabel: false,
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#defafe',
+          width: '1',
+          type: 'solid',
         },
       },
-    ],
-    yAxis: [
-      {
-        type: 'value',
-        name: '单位:辆',
-        nameTextStyle: {
+      axisLabel: {
+        interval: 0,
+        rotate: 45,
+        textStyle: {
           color: '#defafe',
         },
-        axisLabel: {
-          textStyle: {
-            color: '#defafe',
-          },
-          formatter: '{value}',
+      },
+    }, ],
+    yAxis: [{
+      type: 'value',
+      name: '单位:辆',
+      nameTextStyle: {
+        color: '#defafe',
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#defafe',
         },
-        splitLine: {
-          //网格线
-          show: true,
-          lineStyle: {
-            color: ['#2e3f5d'],
-            type: 'solid',
-          },
+        formatter: '{value}',
+      },
+      splitLine: {
+        //网格线
+        show: true,
+        lineStyle: {
+          color: ['#2e3f5d'],
+          type: 'solid',
         },
+      },
 
-        axisLine: {
-          lineStyle: {
-            color: '#defafe',
-            width: '1',
-            type: 'solid',
-          },
+      axisLine: {
+        lineStyle: {
+          color: '#defafe',
+          width: '1',
+          type: 'solid',
         },
       },
-    ],
-    series: [
-      {
-        name: '',
-        type: 'bar',
-        barWidth: '16',
-        barCategoryGap: '100%',
-        itemStyle: {
-          normal: {
-            color: '#5ac7ff',
-          },
+    }, ],
+    series: [{
+      name: '',
+      type: 'bar',
+      barWidth: '16',
+      barCategoryGap: '100%',
+      itemStyle: {
+        normal: {
+          color: '#5ac7ff',
         },
-        data: [],
       },
-    ],
+      data: [],
+    }, ],
   };
   // 使用刚指定的配置项和数据显示图表。
   // myChart2.setOption(option2);
@@ -805,8 +497,7 @@ export default () => {
         formatter: '{b}: {c} ({d}%)',
       },
 
-      series: [
-        {
+      series: [{
           name: '下载量',
           type: 'pie',
           z: 10,
@@ -862,8 +553,7 @@ export default () => {
               },
             },
           },
-          data: [
-            {
+          data: [{
               value: value1,
               name: '普运',
               //selected: true,
@@ -934,22 +624,20 @@ export default () => {
               fontSize: 14,
             },
           },
-          data: [
-            {
-              value: value1,
-              name: '辆',
-              tooltip: {
-                show: false,
-                trigger: 'item',
-                formatter: '{b}: {c} ({d}%)',
-              },
-              itemStyle: {
-                normal: {
-                  color: '#0a2e6b',
-                },
+          data: [{
+            value: value1,
+            name: '辆',
+            tooltip: {
+              show: false,
+              trigger: 'item',
+              formatter: '{b}: {c} ({d}%)',
+            },
+            itemStyle: {
+              normal: {
+                color: '#0a2e6b',
               },
             },
-          ],
+          }, ],
         },
         {
           name: '下载量',
@@ -986,19 +674,17 @@ export default () => {
               shadowBlur: 10,
             },
           },
-          data: [
-            {
-              value: valueTotal,
+          data: [{
+            value: valueTotal,
             tooltip: {
               show: false,
               trigger: 'item',
               formatter: '{b}: {c} ({d}%)',
             },
-          },
-        ],
-      },
-    ],
-  };
+          }, ],
+        },
+      ],
+    };
 
   };
 
@@ -1008,14 +694,18 @@ export default () => {
   // var value4 = 500;
   // var value5 = 400;
 
-  
+
 
   // mycharts3.setOption(option3);
 
   // 左上 各区县企业分布统计
   axios
     .post('http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJF/getCompanyCount')
-    .then(({ data: { data } }) => {
+    .then(({
+      data: {
+        data
+      }
+    }) => {
       const json = data.dataList;
 
       for (var i of json) {
@@ -1037,7 +727,11 @@ export default () => {
   // 右上 从业人员年龄段分析
   axios
     .post('http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJF/getEmployeeCount')
-    .then(({ data: { data } }) => {
+    .then(({
+      data: {
+        data
+      }
+    }) => {
       // 0:装卸管理员 1:特种设备作业人员 2:驾驶员 3:押运员 4:其他人员 5：装卸管理人员
       const [type1, type2, type3, type4, type5, type0] = data.dataList1;
       $('#yayunren').html(type3.count);
@@ -1094,7 +788,11 @@ export default () => {
   // 左下 获取装卸区数量统计
   axios
     .get('http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJJ/getUnloadingRegionCount')
-    .then(({ data: { data } }) => {
+    .then(({
+      data: {
+        data
+      }
+    }) => {
       // console.log(response.data.data);
       var datas = data.dataList;
 
@@ -1139,58 +837,66 @@ export default () => {
     });
 
   axios
-  .get('http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJJ/getUnloadingRegionByGoods')
-  .then(({ data: { data } }) => {
-    console.log(data);
-    // TODO 充装车位品种分析 等，貌似没接口
-    // char('section', 1000, 230);
-    // char('section2', 1000, 660);
-    // char('section3', 1000, 1000);
-    // char('section4', 1000, 990);
-    let ids = ['section','section2','section3','section4'];
-    // 获取最大数
-    let temp = [];
-    data.loadingList.forEach(v => {
-      temp.push(v.count);
-    });
-    let maxValue = Number(
-      `1${'0'.repeat(`${Math.max(...temp)}`.length)}`
-    );
-    data.loadingList.forEach((v, i) => {
-      if(!ids[i]) return;
-      char(ids[i], maxValue, v.count, v.goodsName);
+    .get('http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJJ/getUnloadingRegionByGoods')
+    .then(({
+      data: {
+        data
+      }
+    }) => {
+      console.log(data);
+      // TODO 充装车位品种分析 等，貌似没接口
+      // char('section', 1000, 230);
+      // char('section2', 1000, 660);
+      // char('section3', 1000, 1000);
+      // char('section4', 1000, 990);
+      let ids = ['section', 'section2', 'section3', 'section4'];
+      // 获取最大数
+      let temp = [];
+      data.loadingList.forEach(v => {
+        temp.push(v.count);
+      });
+      let maxValue = Number(
+        `1${'0'.repeat(`${Math.max(...temp)}`.length)}`
+      );
+      data.loadingList.forEach((v, i) => {
+        if (!ids[i]) return;
+        char(ids[i], maxValue, v.count, v.goodsName);
+      });
+
+      ids = ['section5', 'section6', 'section7', 'section8'];
+      temp = [];
+      data.unloadingList.forEach(v => {
+        temp.push(v.count);
+      });
+      maxValue = Number(
+        `1${'0'.repeat(`${Math.max(...temp)}`.length)}`
+      );
+      data.unloadingList.forEach((v, i) => {
+        if (!ids[i]) return;
+
+        char(ids[i], maxValue, v.count, v.goodsName);
+      });
+      // char('section5', 1000, 200);
+      // char('section6', 1000, 660);
+      // char('section7', 1000, 800);
+      // char('section8', 1000, 900);
+    })
+    .catch(error => {
+      console.log('左下：货物信息');
+      console.log(error);
     });
 
-    ids = ['section5','section6','section7','section8'];
-    temp = [];
-    data.unloadingList.forEach(v => {
-      temp.push(v.count);
-    });
-    maxValue = Number(
-      `1${'0'.repeat(`${Math.max(...temp)}`.length)}`
-    );
-    data.unloadingList.forEach((v, i) => {
-      if(!ids[i]) return;
-      
-      char(ids[i], maxValue, v.count, v.goodsName);
-    });
-    // char('section5', 1000, 200);
-    // char('section6', 1000, 660);
-    // char('section7', 1000, 800);
-    // char('section8', 1000, 900);
-  })
-  .catch(error => {
-    console.log('左下：货物信息');
-    console.log(error);
-  });
 
-  
 
   // 右下 运输范围统计
   // 车辆数据
   axios
     .get(`http://60.210.40.196:25028/zxhsys-dzyd-consumption/tbusiBillJJ/getVehicleCount`)
-    .then(({ data: { data } }) => {
+    .then(({
+      data: {
+        data
+      }
+    }) => {
 
       console.log(data);
 
@@ -1216,7 +922,9 @@ export default () => {
 
 
       const getData = (list = stateList, key = 'vehicleState', value = 0) => {
-        return _.find(list, item => item[key] === value) || { vehicleCount: 0 };
+        return _.find(list, item => item[key] === value) || {
+          vehicleCount: 0
+        };
       }
 
       option2.xAxis[0].data = [];
@@ -1225,7 +933,7 @@ export default () => {
         option2.xAxis[0].data.push(item.vehicleType);
         option2.series[0].data.push(item.vehicleCount);
       })
-      
+
       // // 1:中型普通货车  2:保温冷藏车   4:危险品运输车  5:小型普通货车  6:平板车  7:挂车  8:牵引车  9:罐车  10:重型普通货车  11:集装箱车 3:其他车辆',
       // [
       //   getData(vehicleList, 'vehicleType', 1).vehicleCount,
